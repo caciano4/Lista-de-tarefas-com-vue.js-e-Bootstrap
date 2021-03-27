@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./index.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1 class="display-4">Lista De Tarefas </h1>
+        <input type="text" placeholder="What has be Do ?" class="input-group" v-model="newTodo" @keyup="store($event, newTodo)"/>
+
+        <hr/>
+
+        <table class="table">
+            <tbody>
+                <tr v-for="todo in todos">
+                    <td>
+                        <span v-if="!todo.edit">
+                            <input type="checkbox" v-model="todo.finished " @click="finished(todo)"/>
+                            <span :class="todo.finished ? 'todo-finished' : ' ' " @dblclick="edit(todo)"> {{todo.description}}</span>
+                        </span>
+                        <input v-else type="text" 
+                        v-model="todo.description"
+                        @keyup="update($event, todo)"
+                        @blur="cancelUpdate(todo)"
+                         />
+                     
+                    </td>
+                    <td align-right>
+                        <button class="btn btn-danger" @click="remove">x</button>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+       
+    </div>
+    
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="index.js"></script>
+</body>
+
+
+</html>
